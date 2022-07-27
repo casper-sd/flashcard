@@ -1,0 +1,38 @@
+<div class="card col-md-3 border-primary m-4" style="max-width: 30%; width: 30%; min-height: 250px;">
+  <div class="card-header">
+    {{ genre.name }}
+    <span class="badge {% if user_deck.privacy == 'external' %}bg-warning{% else %}bg-primary{% endif %}
+    m-1 position-relative float-end rounded-pill">
+      {{ user_deck.privacy }}
+    </span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ deck.name }}</h5>
+    <p class="card-text">This deck contains {{ card_count }} cards. {{ deck.desc }}
+      <br><span class="mark">Creator: {{ creator.f_name }} {{ creator.l_name }}</span>
+    </p>
+    {% if page == 'training' %}
+    <button onclick="Zone('rtype=training&id={{ deck.deck_id }}', 'GET', 'replace')" class="btn btn-primary mt-2">Start Training</button>
+    {% elif page == 'decks' %}
+    {% if user_deck.privacy == 'external' %}
+    <button onclick="Zone('rtype=delete&entity=deck&id={{ deck.deck_id }}', 'DELETE', 'replace')" class="btn btn-warning m-2">Remove from Collection</button>
+    {% else %}
+    <button onclick="Zone('rtype=edit&id={{ deck.deck_id }}', 'GET', 'replace')" class="btn btn-warning m-2">Edit</button>
+    <button onclick="Zone('rtype=delete&entity=deck&id={{ deck.deck_id }}', 'DELETE', 'replace')" class="btn btn-danger m-2">Delete</button>
+    {% endif %}
+    {% elif page == 'explore' %}
+    <button onclick="Zone('rtype=add&id={{ deck.deck_id }}', 'PUT', 'replace')" class="btn btn-primary mt-2">Add to Collection</button>
+    {% endif %}
+  </div>
+  <div class="card-footer text-muted">
+    {% if page == 'explore' %}
+      Currently {{ user_count }} users are using this deck
+    {% else %}
+      {% if user_deck.attempts != 0 %}
+      {{ user_deck.attempts }} Attempts
+      {% else %}
+      You haven't attempted this deck yet
+      {% endif %}
+    {% endif %}
+  </div>             
+</div>

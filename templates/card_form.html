@@ -1,0 +1,46 @@
+<form class="card col-md-3 border-primary {% if state != 'new' %}cardform{% endif %}" 
+style="width: 30%; max-width: 30%; margin: 1%; min-height: 200px;" onsubmit="event.preventDefault()">
+    <input id="state" type="hidden" name='state' value={{ state }}>
+    {% if state == 'old' %}
+    <input id="cid" type="hidden" name='cid' value={{ card.card_id }}>
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">Card Contents</h5>
+        <div class="input-group m-2">
+            <span class="input-group-text">Question</span>
+            <input id="cq" type="text" name="cq" class="form-control" placeholder="Enter question here" required
+            {% if state != 'new' %}value="{{ card.question }}" disabled {% endif %}>
+        </div>
+        <div class="input-group m-2">
+            <span class="input-group-text">Answer</span>
+            <input id="ca" type="text" name="ca" class="form-control" placeholder="Enter answer here" required
+            {% if state != 'new' %}value="{{ card.answer }}" disabled {% endif %}>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-center">
+        <button id="csave" class="btn btn-primary me-4 ms-4" type="submit" onclick="
+            let card = this.parentNode.parentNode
+            if(card.querySelector('#cq').value !== '' && card.querySelector('#ca').value !== ''){
+                card.querySelector('#cedit').style.display = 'flex';
+                card.querySelector('#cq').disabled = true;
+                card.querySelector('#ca').disabled = true;
+                card.classList.add('cardform')
+                this.style.display = 'none'
+            }"{% if state != 'new' %}style="display: none;"{% endif %}>Save</button>
+        <button id="cedit" class="btn btn-warning me-4 ms-4" type="button" {% if state == 'new' %}style="display: none;"{% endif %} onclick="
+            let card = this.parentNode.parentNode
+            if(card.querySelector('#cq').value !== '' && card.querySelector('#ca').value !== ''){
+                card.querySelector('#csave').style.display = 'flex';
+                card.querySelector('#cq').disabled = false;
+                card.querySelector('#ca').disabled = false;
+                card.classList.remove('cardform')
+                this.style.display = 'none'
+            }">Edit</button>
+        <button id="cdelete" class="btn btn-danger me-2 ms-2" type="button" 
+        onclick="document.getElementById('zone').removeChild(this.parentNode.parentNode);
+        {% if state == 'old' %}
+        Zone('rtype=delete&entity=card&id={{ card.card_id }}', 'DELETE', '');
+        {% endif %}">Delete</button>
+    </div>         
+</form>
+

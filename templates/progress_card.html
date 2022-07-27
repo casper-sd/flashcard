@@ -1,0 +1,29 @@
+<div class="card m-5 border border-3 {% if accuracy < inaccuracy %}border-danger{% else %}border-success{% endif %}" style="width: 40%;">
+    <div class="card-header">
+        {{ genre.name }}
+        <span class="badge {% if user_deck.privacy == 'external' %}bg-warning{% else %}bg-primary{% endif %}
+        m-1 position-relative float-end rounded-pill">
+        {{ user_deck.privacy }}
+        </span>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ deck.name }}</h5>
+      <p class="card-text">{{ deck.desc }} <br>You can always go to the training tab and improve your accuracy.</p>
+      <span>Total attempts for this deck: {{ user_deck.attempts }} attempts</span><br>
+      <span class="mt-2">Accuracy: {{ accuracy }}%</span>
+      <div class="progress" style="height: 5px;">
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ accuracy|int }}%"></div>
+      </div>
+      <span class="mt-2">Inaccuracy: {{ inaccuracy }}%</span>
+      <div class="progress" style="height: 5px;">
+        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ inaccuracy|int }}%"></div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+        {% if user_deck.attempts == 0 %}
+        Not Attempted Yet
+        {% else %}
+        Last attempted on: {{ user_deck.la_dt }}
+        {% endif %}
+    </div>
+</div> 

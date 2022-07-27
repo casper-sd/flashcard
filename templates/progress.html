@@ -1,0 +1,13 @@
+{% if decks_count == 0 %}
+<p class="display-6 w-75" style="text-align: center;">
+    No Progress to Display.
+    This page is intended to show your performance for each deck.
+    We'll update this page once you start your training.
+</p>
+{% else %}
+<div class="w-100 d-flex justify-content-center">
+    <hr style="width: 30%; align-self: center; height: 5px;">
+    <p class="display-4 sticky-top" style="text-align: center; width: 40%;">Your Deck-wise Progress</p>
+    <hr style="width: 30%; align-self: center; height: 5px;">
+</div>
+{% endif %}

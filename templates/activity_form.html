@@ -1,0 +1,8 @@
+<div class="card m-4 border border-2 border-primary" style="width: 70%;">
+    <div class="card-header">Activity Time: {{ activity.date_time }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ activity.a_type }}</h5>
+      <p class="card-text">{{ activity_content }}</p>
+    </div>
+    <div class="card-footer text-muted">Affected Resource: {{activity.target}}</div>
+</div>

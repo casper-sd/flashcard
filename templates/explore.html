@@ -1,0 +1,12 @@
+{% if decks_count == 0 %}
+<p class="display-6 w-75" style="text-align: center;">
+    At this moment, there are no public decks available from other users.
+    Please check back later for new interesting decks. 
+</p>
+{% else %}
+<div class="w-100 d-flex justify-content-center">
+    <hr style="width: 30%; align-self: center; height: 5px;">
+    <p class="display-4 sticky-top" style="text-align: center; width: 40%;">Decks to Explore</p>
+    <hr style="width: 30%; align-self: center; height: 5px;">
+</div>
+{% endif %}

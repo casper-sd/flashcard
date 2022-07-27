@@ -1,0 +1,75 @@
+<div class="w-100">
+    <form id="deckform" class="container-sm border border-5 rounded justify-content-md-center" style="padding: 30px; padding-top: 10px; width: 50%;" onsubmit="event.preventDefault()">
+        <h1 class="display-6 text-center m-1">
+        {% if request == 'create' %}
+        Create New Deck
+        {% else %}
+        Edit Deck
+        {% endif %}
+        </h1>
+        <div class="mb-3">
+            <label for="name" class="form-label">Deck Name</label>
+            <input id="name" type="text" class="form-control" name="name" placeholder="Enter deck name" required 
+            {% if request != 'create' %}value='{{ deck.name }}'{% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">{% if request == 'create' %}Available {% else %}Selected {% endif %}Genre</span>
+            <select id="genre" class="form-control" name="genre" aria-selected="true" style="text-align: center;" 
+            onchange="document.getElementById('newgenre').value = ''" {% if genres|length == 0 %}disabled{% endif %}>
+                {% if genres|length != 0 %}
+                <option style="display:none;" value="">---- Select a genre ----</option>
+                {% for genre in genres %}
+                {% if request == 'create' %}
+                <option value={{ genre.name }}>{{ genre.name }}</option>
+                {% elif request == 'edit' %}
+                <option value={{ genre.name }} {% if genre.genre_id == deck.genre_id %}selected{% endif %} >{{ genre.name }}</option>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <option style="display: none;" value="">No Genre available. Create now</option>
+                {% endif %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="newgenre" class="form-label">Or, you can create you own Genre</label>
+            <input id="newgenre" class="form-control" name="newgenre" placeholder="Enter your genre here" type="text"
+            onchange="document.getElementById('genre').selectedIndex = 0;">
+        </div>
+
+        <div class="mb-3">
+            <label for="desc" class="form-label">Descriptions</label>
+            <input id="desc" class="form-control" name="desc" placeholder="Best place to put comments for this deck" type="text"
+            {% if request == 'edit' %}value='{{ deck.desc }}'{% endif %}>
+        </div>
+        
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% if request == 'edit' %}
+            <input type="radio" class="btn-check" name="privacy" id="privacy1" autocomplete="off" {% if user_deck.privacy == 'private' %} checked="" {% endif %} value="private">
+            <label class="btn btn-outline-primary" for="privacy1">Private</label>
+            <input type="radio" class="btn-check" name="privacy" id="privacy2" autocomplete="off" {% if user_deck.privacy == 'public' %} checked="" {% endif %} value="public">
+            <label class="btn btn-outline-primary" for="privacy2">Public</label>
+            {% elif request == 'create' %}
+            <input type="radio" class="btn-check" name="privacy" id="privacy1" autocomplete="off" checked="" value="private">
+            <label class="btn btn-outline-primary" for="privacy1">Private</label>
+            <input type="radio" class="btn-check" name="privacy" id="privacy2" autocomplete="off" value="public">
+            <label class="btn btn-outline-primary" for="privacy2">Public</label>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary float-end" 
+        onclick="Zone('rtype={% if request == 'create' %}create{% else %}edit&id={{ deck.deck_id }}{% endif %}', 'POST', 'replace')">Save</button>
+    </form>
+</div>
+
+<div class="w-100 d-flex justify-content-center mt-5">
+    <hr style="width: 40%; align-self: center; height: 5px;">
+    <div class="display-4" style="text-align: center; width: 40%;">
+        <div class="mb-3">
+            <button type="button" class="btn btn-secondary" 
+            onclick="Zone('rtype=getcard', 'GET', 'append')">
+                <i class="bi bi-plus fs-2"></i>
+                <span class="fs-2">Add Card</span>
+            </button>
+        </div>
+    </div>
+    <hr style="width: 40%; align-self: center; height: 5px;">
+</div>

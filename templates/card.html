@@ -1,0 +1,36 @@
+<div class="card col-md-3 border border-primary m-4 align-self-center" style="width: 60%; min-width: 300px; margin: 1%; min-height: 300px;">
+  <div class="card-header">
+    Card Number: {{ card_index+1 }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ card.question }}</h5>
+    <p class="card-text">Please choose the correct answer from the choices given below</p>
+  </div>
+  <div class="card-footer d-flex justify-content-center">
+      {% if user_card.c_attempt + user_card.w_attempt == 0 %}
+      You're attempting this card for the first time
+      {% else %}
+      You've attempted this card {{ user_card.c_attempt }} times correctly out of {{ user_card.c_attempt + user_card.w_attempt }} attempts. 
+      {% endif %}
+  </div>   
+</div>
+
+<div class="d-flex justify-content-center flex-wrap" id="choices">
+  {% if attempt %}
+  {% for choice in choices %}
+  <button class="btn btn-primary m-2 choice 
+  {% if stat['option_id'] == loop.index - 1 %}
+    {% if stat['correct_id'] != stat['option_id'] %}bg-danger{% endif %}
+  {% endif %}
+  {% if stat['correct_id'] == loop.index - 1 %}
+    bg-success
+  {% endif %}"
+  style="max-width: 90%; white-space: normal; word-wrap: break-word;" disabled>{{ choice }}</button>
+  {% endfor %}
+  {% else %}
+  {% for choice in choices %}
+  <button onclick="Zone('rtype=valid&id={{ loop.index - 1 }}', 'POST', '')" class="btn btn-primary m-2 choice"
+  style="max-width: 90%; white-space: normal; word-wrap: break-word;">{{ choice }}</button>
+  {% endfor %}
+  {% endif %}
+</div> 

@@ -1,0 +1,22 @@
+<div class='d-flex justify-content-center'>
+    <div class="card col-md-3" style="max-width: 30%; width: fit-content; margin: 1%; min-height: 200px;">
+        <div class="w-100 h-100 d-flex justify-content-center" onclick="Zone('rtype=create', 'GET', 'replace')" 
+        onmouseover="this.style.cursor = 'pointer'">
+            <i class="bi bi-plus-square fs-1 m-5"></i>
+        </div>
+        <div class="card-footer text-muted">
+            <span class="display-6">Create New Deck</span>
+        </div>
+    </div>
+</div>
+<div class="w-100 d-flex justify-content-center">
+    <hr style="width: 30%; align-self: center; height: 5px;">
+    <p class="display-4 sticky-top" style="text-align: center; width: 40%;">Your Collection</p>
+    <hr style="width: 30%; align-self: center; height: 5px;">
+</div>
+{%if decks_count == 0%}
+<p class="display-6" style="text-align: center;">
+    We didn't find any decks in your collection. 
+    Create your own deck or explore public decks and add them to your collection.
+</p>
+{% endif %}

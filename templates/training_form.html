@@ -1,0 +1,28 @@
+<div class="container-fluid w-100 h-100 d-flex flex-column justify-content-center">
+    <div style="width: fit-content;" class="align-self-center display-6">Deck: {{ deck.name }}</div>
+    <hr style="height: 2px; width: 90%;" class="align-self-center">
+    <div class="d-flex flex-row h-100 w-100 justify-content-between m-1 align-self-center">
+        <button id="getprev" class="btn align-self-center d-flex flex-column fs-1 btn-outline-light" style="height: fit-content; width: 20%;"
+        onclick="Zone('rtype=prev', 'GET', '')">
+            <i class="bi bi-arrow-left align-self-center" style="width: fit-content;"></i>
+            <span class="align-self-center" style="width: fit-content;">Previous</span>
+        </button>
+        <div class="h-100 d-flex flex-column" style="width: 60%; min-height: 300px;">
+            <div class="d-flex justify-content-center w-100">
+                <div class="w-25 d-flex justify-content-center m-2">
+                    <span class="badge bg-secondary fs-5">Cards Attempted: <span id="card-att">{{ c_att }}</span></span>
+                </div>
+                <div class="w-25 d-flex justify-content-center m-2">
+                    <span class="badge bg-success fs-5">Cards Remaining: <span id="card-rem">{{ c_rem }}</span></span>
+                </div>
+            </div>
+            <div id="training_pane" class="w-100 d-flex flex-column"></div>
+        </div>
+        <button id="getnext" class="btn align-self-center d-flex flex-column fs-1 btn-outline-light" style="height: fit-content; width: 20%;"
+        onclick="Zone('rtype=next', 'GET', '')">
+            <i class="bi bi-arrow-right align-self-center" style="width: fit-content;"></i>
+            <span class="align-self-center" style="width: fit-content;">Next</span>
+        </button>
+    </div>
+    <button class="btn btn-secondary m-2 align-self-center" onclick="getPage('/dashboard/training'); fetch('/cleardata')">Exit Training</button>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title }}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+            crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous">
+        </script>
+    </head>
+    <body>
+        <h1 class="display-2 text-center" style="margin: 2%; margin-bottom: 70px;">{{ title }}</h1>
+        <form class="container border border-5 rounded text-sm-center" method="post" style="padding: 1%; width: 60%;">
+            {% if title == 'Registration'%}
+            <div class="row g-2 justify-content-md-center" style="margin: 10px;">
+                <div class="col-5">
+                    <div class="input-group">
+                        <span class="input-group-text">First Name</span>
+                        <input type="text" name="fname" class="form-control" placeholder="Enter your First Name" required>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="input-group">            
+                        <span class="input-group-text">Last Name</span>
+                        <input type="text" name="lname" class="form-control" placeholder="Enter your Last Name">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row g-2 justify-content-md-center" style="margin: 10px;">
+                <div class="col-5">
+                    <div class="input-group">
+                        <span class="input-group-text">Username</span>
+                        <input type="text" name="user" class="form-control" placeholder="Enter your username" required>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="input-group">            
+                        <span class="input-group-text">Password</span>
+                        <input type="password" name="pass" class="form-control" placeholder="Enter a strong password" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-2 justify-content-md-center" style="margin: 10px;">
+                <div class="col-10">
+                    <div class="input-group">
+                        <span class="input-group-text">Security Question</span>
+                        <select class="form-control" name="secques" aria-selected="true" required style="text-align: center;">
+                            <option style="display:none" value=''>---- Click here and select a question from below ----</option>
+                            <option value=1>What is your place of birth?</option>
+                            <option value=2>What is your hobby?</option>
+                            <option value=3>What is your favourite movie?</option>
+                            <option value=4>What is your favourite novel?</option>
+                            <option value=5>What is your favourite quotation?</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-md-center" style="margin: 10px;">
+                <div class="col-10">
+                    <div class="input-group">            
+                        <span class="input-group-text">Security Answer</span>
+                        <input type="pass" name="secans" class="form-control" placeholder="Enter your answer" required>
+                    </div>
+                    <p class="text-warning text-start">* This would be useful when you forget your password</p>
+                </div>
+            </div>
+            <div style="margin-top: 2%; margin-bottom: 10px;">
+                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="button" onclick="window.history.back()" class="btn btn-secondary">Back</button>
+            </div>
+            
+        </form>
+    </body>
+</html>
